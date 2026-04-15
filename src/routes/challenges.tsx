@@ -19,7 +19,11 @@ export const Route = createFileRoute("/challenges")({
 
 function ChallengesPage() {
   const [activeChallenge, setActiveChallenge] = useState<Challenge | null>(null);
-  const [progress, setProgress] = useState(loadData().challenges);
+  const [progress, setProgress] = useState<Record<string, { completed: boolean; stars: number }>>({});
+
+  useEffect(() => {
+    setProgress(loadData().challenges);
+  }, []);
 
   const getUnlocked = (index: number) => {
     if (index === 0) return true;
