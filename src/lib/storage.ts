@@ -16,6 +16,10 @@ export interface AppData {
 
 const STORAGE_KEY = "atom-simulator-data";
 
+function isClient(): boolean {
+  return typeof window !== "undefined" && typeof localStorage !== "undefined";
+}
+
 function getDefaultData(): AppData {
   return {
     lastAtom: null,
@@ -25,6 +29,7 @@ function getDefaultData(): AppData {
 }
 
 export function loadData(): AppData {
+  if (!isClient()) return getDefaultData();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return getDefaultData();
@@ -35,6 +40,7 @@ export function loadData(): AppData {
 }
 
 export function saveData(data: Partial<AppData>) {
+  if (!isClient()) return;
   const current = loadData();
   const merged = { ...current, ...data };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
