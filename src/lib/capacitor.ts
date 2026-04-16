@@ -1,7 +1,10 @@
-import { Capacitor } from '@capacitor/core';
-
 export function isNativePlatform(): boolean {
-  return Capacitor.isNativePlatform();
+  try {
+    // Only check if Capacitor global is available (injected by native shell)
+    return typeof window !== 'undefined' && !!(window as any).Capacitor?.isNativePlatform?.();
+  } catch {
+    return false;
+  }
 }
 
 export async function initCapacitor() {
