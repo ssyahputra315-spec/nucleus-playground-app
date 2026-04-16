@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { BottomNav } from "@/components/BottomNav";
+import { useEffect } from "react";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -59,8 +60,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  useEffect(() => {
+    import("@/lib/capacitor").then(({ initCapacitor }) => initCapacitor());
+  }, []);
+
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen pb-20 safe-area-top">
       <Outlet />
       <BottomNav />
     </div>
