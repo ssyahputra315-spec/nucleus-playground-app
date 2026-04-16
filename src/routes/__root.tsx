@@ -61,7 +61,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   useEffect(() => {
-    import("@/lib/capacitor").then(({ initCapacitor }) => initCapacitor());
+    import("@/lib/capacitor").then(({ initCapacitor }) => initCapacitor()).catch(() => {
+      // Capacitor not available in web — safe to ignore
+    });
   }, []);
 
   return (
