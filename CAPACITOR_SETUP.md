@@ -71,14 +71,37 @@ keytool -genkey -v -keystore atom-simulator.keystore -alias atom-simulator -keya
 
 ## Updating the App
 
-After making changes:
+After making changes to your web code:
 
+1. **Rebuild the web app (CRITICAL - always do this first)**
+   ```bash
+   npm run build
+   ```
+
+2. **Sync to Android**
+   ```bash
+   npx cap sync android
+   ```
+
+3. **Rebuild in Android Studio** - Open Android Studio and click Run ▶
+
+## Troubleshooting
+
+### "Could not find the web assets directory" error
+
+**Cause**: You ran `npx cap sync` before building the web app.
+
+**Solution**: 
 ```bash
 npm run build
 npx cap sync android
 ```
 
-Then rebuild in Android Studio.
+### Build fails in Android Studio
+
+1. Check that `npm run build` completed successfully
+2. Verify `.output/public` exists and contains `index.html`
+3. Make sure you ran `npx cap sync android` after building
 
 ## Useful Commands
 
