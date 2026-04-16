@@ -33,8 +33,11 @@ export const Route = createRootRoute({
       { title: "Atom Structure Simulator" },
       { name: "description", content: "Interactive educational simulator to build and explore atomic structures" },
       { property: "og:title", content: "Atom Structure Simulator" },
-      { property: "og:description", content: "Build and explore atomic structures interactively" },
+      { property: "og:description", content: "Interactive educational simulator to build and explore atomic structures" },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Atom Structure Simulator" },
+      { name: "twitter:description", content: "Interactive educational simulator to build and explore atomic structures" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
