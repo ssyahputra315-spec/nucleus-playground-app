@@ -8,11 +8,15 @@
 
 ## Setup Steps
 
-### 1. Build the web app
+### 1. Build the web app (REQUIRED FIRST STEP)
+
+You MUST build the web app before adding/syncing Android platform:
 
 ```bash
 npm run build
 ```
+
+This creates the `.output/public` directory that Capacitor needs.
 
 ### 2. Add Android platform
 
