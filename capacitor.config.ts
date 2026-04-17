@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.atomsimulator.app',
   appName: 'Atom Structure Simulator',
-  webDir: '.output/public',
+  webDir: 'dist/capacitor',
   server: {
     androidScheme: 'https',
   },

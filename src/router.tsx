@@ -1,5 +1,15 @@
-import { createRouter, useRouter } from "@tanstack/react-router";
+import { createBrowserHistory, createHashHistory, createRouter, useRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+
+function shouldUseNativeHistory() {
+  if (typeof window === "undefined") return false;
+
+  try {
+    return window.location.protocol === "file:" || !!(window as any).Capacitor?.isNativePlatform?.();
+  } catch {
+    return false;
+  }
+}
 
 function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
@@ -55,9 +65,16 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
 }
 
 export const getRouter = () => {
+  const history = typeof window === "undefined"
+    ? undefined
+    : shouldUseNativeHistory()
+      ? createHashHistory()
+      : createBrowserHistory();
+
   const router = createRouter({
     routeTree,
     context: {},
+    ...(history ? { history } : {}),
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
