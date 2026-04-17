@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:android": "vite build --config vite.capacitor.config.ts",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "sync:android": "npm run build:android && npx cap sync android",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.1",
     "@capacitor/app": "^8.1.0",
     "@capacitor/cli": "^8.3.0",
     "@capacitor/core": "^8.3.0",
