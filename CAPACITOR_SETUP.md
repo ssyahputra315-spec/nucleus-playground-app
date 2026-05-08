@@ -69,6 +69,29 @@ keytool -genkey -v -keystore atom-simulator.keystore -alias atom-simulator -keya
 4. Fill in store listing, screenshots, and privacy policy
 5. Submit for review
 
+## Generating App Icons & Splash Screens
+
+Source images are in `assets/`:
+- `assets/icon.png` (1024×1024)
+- `assets/splash.png` (2732×2732 recommended; 1920×1920 also fine)
+
+Run on your local machine (the Lovable dev environment can't write into the `android/` folder for you):
+
+```bash
+npm run assets:android
+```
+
+This calls `@capacitor/assets generate --android` and writes all required mipmap/drawable sizes into `android/app/src/main/res/`.
+
+> **Why the `--android` flag?** Without it, the tool also tries to generate PWA assets and fails with `ENOENT: ...\www\manifest.json`. We don't ship a PWA, so we skip that target.
+
+After generating, sync and reopen Android Studio:
+
+```bash
+npm run sync:android
+npx cap open android
+```
+
 ## Updating the App
 
 After making changes to your web code:
